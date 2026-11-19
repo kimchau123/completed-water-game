@@ -10,21 +10,66 @@
   <div class="container">
     <h1>Water Quest</h1>
     <img class="brand-logo" src="img/cw_logo_horizontal.png" alt="charity: water logo">
-    <p class="game-instructions">Collect 25 items to complete the game!</p>
+    <p class="charity-message">charity: water works to bring clean and safe water to people around the world. Play to learn more and help spread the word.</p>
+    <div class="difficulty-control">
+      <label for="difficulty-mode">Difficulty</label>
+      <select id="difficulty-mode">
+        <option value="easy">Easy</option>
+        <option value="normal" selected>Normal</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
+    <p id="game-instructions" class="game-instructions">Collect 50 cans in 70 seconds. Avoid dirty water drops. The game speeds up at 25 cans.</p>
     <div class="stats">
       <p>Cans Collected: <span id="current-cans">0</span></p>
-      <p>Time Left: <span id="timer">50</span>s</p>
+      <p>Time Left: <span id="timer">70</span>s</p>
     </div>
     <div id="achievements" class="message-overlay" hidden>
       <div class="message-box" role="dialog" aria-modal="true" aria-labelledby="message-text">
         <p id="message-text" aria-live="polite"></p>
+        <p id="charity-end-message" class="charity-end-message" hidden>
+          Thanks for playing! <a href="https://www.charitywater.org/donate" target="_blank" rel="noopener noreferrer">Explore ways to support clean water.</a>
+        </p>
         <button id="dismiss-message">Close</button>
       </div>
     </div>
+    <div id="milestone-message" class="milestone-message" hidden aria-live="polite"></div>
     <div class="game-grid"></div>
-    <button id="start-game">Start Game</button>
-    <button id="end-game" hidden>End Game</button>
-    <button id="reset-game" hidden>Reset Game</button>
+    <div class="game-controls">
+      <button id="start-game">Start Game</button>
+      <button id="end-game" hidden>End Game</button>
+      <button id="pause-game" type="button" hidden aria-pressed="false">Pause Game</button>
+      <button id="reset-game" hidden>Reset Game</button>
+    </div>
+    <div class="audio-controls">
+      <div class="audio-control">
+        <label for="music-choice">Background music</label>
+        <select id="music-choice">
+          <option value="uploaded">On</option>
+          <option value="off">Off</option>
+        </select>
+      </div>
+      <div class="audio-control">
+        <label for="music-volume">Music volume</label>
+        <input id="music-volume" type="range" min="0" max="1" step="0.01" value="0.3">
+        <output id="music-volume-value" for="music-volume">30%</output>
+      </div>
+      <div class="audio-control">
+        <label for="effects-volume">Sound effects</label>
+        <input id="effects-volume" type="range" min="0" max="1" step="0.01" value="0.7">
+        <output id="effects-volume-value" for="effects-volume">70%</output>
+      </div>
+    </div>
+    <audio id="background-music" src="background.mp3/46851258-jeux-de-table-a-hawai-338553.mp3" loop preload="auto"></audio>
+    <div class="count-down" hidden aria-live="assertive"></div>
+    <footer class="site-footer">
+      <p>Help bring clean and safe water to more people.</p>
+      <nav aria-label="charity: water links">
+        <a href="https://www.charitywater.org/" target="_blank" rel="noopener noreferrer">Visit charity: water</a>
+        <a href="https://www.charitywater.org/donate" target="_blank" rel="noopener noreferrer">Donate</a>
+        <a href="https://www.charitywater.org/donate/the-spring" target="_blank" rel="noopener noreferrer">Join The Spring</a>
+      </nav>
+    </footer>
   </div>
   <script src="script.js"></script>
 </body>

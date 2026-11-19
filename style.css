@@ -23,17 +23,18 @@ Fonts:
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: Avenir, "Avenir Next", "Proxima Nova", Arial, sans-serif;
   margin: 0;
   padding: 30px;
-  background-color: #f0f0f0;
+  background: #f0f0f0 url('img/image.png') center / cover no-repeat fixed;
   color: #333;
 }
 
 .container {
+  position: relative;
   max-width: 750px;
   margin: 50px auto;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.82);
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -41,18 +42,31 @@ body {
 
 h1 {
   text-align: center;
-  font-size: 30px;
+  font-size: 34px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #333;
+  color: #1F4E79;
+  letter-spacing: 0.5px;
+}
+
+h1::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin: 10px auto 0;
+  border-radius: 2px;
+  background-color: #FFC907;
 }
 
 .brand-logo {
   display: block;
-  width: 220px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 160px;
   max-width: 100%;
   height: auto;
-  margin: 0 auto 24px;
 }
 
 .game-instructions {
@@ -61,13 +75,43 @@ h1 {
   text-align: center;
 }
 
+.charity-message {
+  max-width: 600px;
+  margin: 0 auto 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.difficulty-control {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  align-items: center;
+  gap: 10px;
+  max-width: 320px;
+  margin: 0 auto 18px;
+  font-weight: bold;
+}
+
+.difficulty-control select,
+.stats {
+  border-radius: 8px;
+}
+
+.difficulty-control select {
+  padding: 8px 10px;
+  border: 1px solid #999;
+  background-color: #fff;
+  color: #333;
+  font: inherit;
+}
+
 .stats {
   display: flex;
   justify-content: space-around;
   margin-bottom: 30px;
   background-color: #f5f5f5;
   padding: 15px 0;
-  border-radius: 8px;
 }
 
 .stats p {
@@ -93,7 +137,7 @@ h1 {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.08s;
   position: relative;
   overflow: hidden;
 }
@@ -126,6 +170,39 @@ h1 {
   transform-origin: center; /* Ensure scaling happens from the center */
 }
 
+.drop-dirty-water {
+  width: 100%;
+  height: 100%;
+  background-image: url('img/drop-dirty-water.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  animation: popUp 0.5s cubic-bezier(0.17, 0.67, 0.34, 2);
+  transform-origin: center;
+}
+
+.grid-cell.dirty-clicked {
+  background-color: #F5402C;
+}
+
+.count-down {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.65);
+  color: #2fdf6d;
+  font-size: clamp(6rem, 25vw, 14rem);
+  font-weight: bold;
+}
+
+.count-down[hidden] {
+  display: none;
+}
+
 @keyframes popUp {
   0% {
     transform: scale(0.5); /* Start scaling from the center */
@@ -153,6 +230,60 @@ button[hidden] {
   display: none;
 }
 
+.game-controls {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  overflow-x: auto;
+  margin: 30px auto 0;
+}
+
+.game-controls button {
+  flex: 0 0 auto;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.audio-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 440px;
+  margin-top: 24px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.audio-control {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(120px, 1.4fr) 42px;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.audio-control select {
+  padding: 8px 10px;
+  border: 1px solid #999;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  font: inherit;
+}
+
+.audio-control input[type="range"] {
+  width: 100%;
+  accent-color: #2E9DF7;
+}
+
+.audio-control output {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
 .message-overlay {
   position: fixed;
   inset: 0;
@@ -166,6 +297,51 @@ button[hidden] {
 
 .message-overlay[hidden] {
   display: none;
+}
+
+.milestone-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  z-index: 8;
+  width: min(90%, 500px);
+  padding: 16px 20px;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  background-color: #FFC907;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.milestone-message[hidden] {
+  display: none;
+}
+
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  z-index: 11;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  width: 10px;
+  height: 16px;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(105vh) rotate(720deg);
+  }
 }
 
 .message-box {
@@ -184,6 +360,40 @@ button[hidden] {
   line-height: 1.4;
 }
 
+.message-box .charity-end-message {
+  margin-top: 14px;
+  font-size: 16px;
+}
+
+.charity-end-message[hidden] {
+  display: none;
+}
+
+.site-footer {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(51, 51, 51, 0.2);
+  font-size: 14px;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0 0 10px;
+}
+
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 20px;
+}
+
+.site-footer a,
+.charity-end-message a {
+  color: #1F4E79;
+  font-weight: bold;
+}
+
 @media (max-width: 600px) {
   body {
     padding: 12px;
@@ -196,11 +406,28 @@ button[hidden] {
 
   h1 {
     font-size: 26px;
+    padding-top: 34px;
+  }
+
+  .brand-logo {
+    top: 14px;
+    left: 14px;
+    width: 110px;
   }
 
   .game-instructions {
     font-size: 16px;
     margin-bottom: 20px;
+  }
+
+  .charity-message {
+    font-size: 14px;
+  }
+
+  .difficulty-control {
+    grid-template-columns: minmax(105px, 1fr) minmax(90px, 1.2fr);
+    gap: 6px;
+    font-size: 14px;
   }
 
   .stats {
@@ -222,5 +449,23 @@ button[hidden] {
   button {
     padding: 12px 16px;
     margin-top: 16px;
+  }
+
+  .game-controls {
+    justify-content: flex-start;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .game-controls button {
+    padding: 8px 8px;
+    margin: 0;
+    font-size: 13px;
+  }
+
+  .audio-control {
+    grid-template-columns: minmax(105px, 1fr) minmax(90px, 1.2fr) 38px;
+    gap: 6px;
+    font-size: 13px;
   }
 }
